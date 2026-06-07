@@ -1,4 +1,39 @@
+"use client";
+
+import { useState } from "react";
+
 export default function Home() {
+  const [email, setEmail] = useState("");
+
+  const submitLead = async () => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!emailRegex.test(email)) {
+      alert("Please enter a valid email address.");
+      return;
+    }
+
+    try {
+      const response = await fetch("/api/leads", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      const result = await response.json();
+
+      alert(result.message);
+
+      if (response.ok) {
+        setEmail("");
+      }
+    } catch {
+      alert("Unable to submit form.");
+    }
+  };
+
   return (
     <main>
       <nav className="bg-white border-b border-gray-200 sticky top-0 z-50">
@@ -33,9 +68,9 @@ export default function Home() {
           </p>
 
           <p className="text-lg mt-8 max-w-3xl mx-auto">
-            Empowering first-generation and underserved youth through
-            leadership development, communication training, mentorship,
-            and real-world career exploration.
+            Empowering first-generation and underserved youth through leadership
+            development, communication training, mentorship, and real-world
+            career exploration.
           </p>
 
           <a
@@ -117,7 +152,8 @@ export default function Home() {
             <div className="p-6">
               <h3 className="text-2xl font-bold">Workshop Moments</h3>
               <p className="mt-3">
-                Photos from leadership labs, simulations, and student activities.
+                Photos from leadership labs, simulations, and student
+                activities.
               </p>
             </div>
           </div>
@@ -136,7 +172,10 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="donate" className="bg-gradient-to-r from-slate-900 to-blue-900 py-20">
+      <section
+        id="donate"
+        className="bg-gradient-to-r from-slate-900 to-blue-900 py-20"
+      >
         <div className="max-w-4xl mx-auto px-6">
           <div className="bg-white rounded-2xl shadow-2xl p-8 md:p-12 text-center">
             <h2 className="text-4xl font-bold text-slate-900">
@@ -151,11 +190,16 @@ export default function Home() {
             <div className="mt-10 flex flex-col md:flex-row gap-4 justify-center">
               <input
                 type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 placeholder="Enter your email address"
                 className="px-5 py-4 rounded-lg bg-white border-2 border-gray-300 text-gray-900 placeholder-gray-500 w-full md:w-96 shadow"
               />
 
-              <button className="bg-yellow-400 hover:bg-yellow-500 text-black px-8 py-4 rounded-lg font-bold shadow">
+              <button
+                onClick={submitLead}
+                className="bg-yellow-400 hover:bg-yellow-500 text-black px-8 py-4 rounded-lg font-bold shadow"
+              >
                 Join the Mission
               </button>
             </div>
