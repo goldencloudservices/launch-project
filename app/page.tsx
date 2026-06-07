@@ -118,15 +118,15 @@ export default function Home() {
     </p>
 
     <div className="mt-10 flex flex-col md:flex-row gap-4 justify-center">
-      <input
-        type="email"
-        placeholder="Your Email"
-        className="px-4 py-3 rounded text-black w-full md:w-96"
-      />
+ <input
+  type="email"
+  placeholder="Enter your email address"
+  className="px-5 py-4 rounded-lg bg-white border-2 border-gray-300 text-gray-900 placeholder-gray-500 w-full md:w-96 shadow-lg"
+/>
 
-      <button className="bg-yellow-400 text-black px-8 py-3 rounded font-bold">
-        Get Updates
-      </button>
+      <button className="bg-yellow-400 hover:bg-yellow-500 text-black px-8 py-4 rounded-lg font-bold shadow-lg">
+  Join the Mission
+</button>
     </div>
   </div>
 </section>
