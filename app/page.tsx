@@ -106,6 +106,30 @@ export default function Home() {
     </div>
   </div>
 </section>
+<section className="bg-slate-900 text-white py-20">
+  <div className="max-w-4xl mx-auto text-center px-6">
+    <h2 className="text-4xl font-bold">
+      Join the Mission
+    </h2>
+
+    <p className="mt-6 text-xl">
+      Get updates on student success stories,
+      leadership labs, and opportunities to help.
+    </p>
+
+    <div className="mt-10 flex flex-col md:flex-row gap-4 justify-center">
+      <input
+        type="email"
+        placeholder="Your Email"
+        className="px-4 py-3 rounded text-black w-full md:w-96"
+      />
+
+      <button className="bg-yellow-400 text-black px-8 py-3 rounded font-bold">
+        Get Updates
+      </button>
+    </div>
+  </div>
+</section>
     </main>
   );
 }
