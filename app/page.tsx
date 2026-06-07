@@ -8,7 +8,7 @@ export default function Home() {
           </h1>
 
           <p className="text-2xl mt-6">
-            Launching Leaders. Building Futures.
+            Launching Leaders. Building Futures. Fueling the Mission.
           </p>
 
           <p className="text-lg mt-8 max-w-3xl mx-auto">
