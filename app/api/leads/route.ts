@@ -1,3 +1,19 @@
+import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
+import { DynamoDBDocumentClient, PutCommand } from "@aws-sdk/lib-dynamodb";
+
+const client = new DynamoDBClient({
+  region: "us-east-1",
+});
+
+const docClient = DynamoDBDocumentClient.from(client);
+
+export async function GET() {
+  return Response.json({
+    success: true,
+    message: "Leads API is running.",
+  });
+}
+
 export async function POST(request: Request) {
   const body = await request.json();
   const email = body.email;
@@ -14,10 +30,19 @@ export async function POST(request: Request) {
     );
   }
 
-  console.log("New lead:", email);
+  await docClient.send(
+    new PutCommand({
+      TableName: "launch-project-leads",
+      Item: {
+        email,
+        createdAt: new Date().toISOString(),
+        source: "website",
+      },
+    })
+  );
 
   return Response.json({
     success: true,
-    message: "Lead received",
+    message: "Lead saved successfully.",
   });
 }
