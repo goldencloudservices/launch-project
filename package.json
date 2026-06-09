@@ -11,6 +11,8 @@
   "dependencies": {
     "@aws-sdk/client-dynamodb": "^3.1063.0",
     "@aws-sdk/lib-dynamodb": "^3.1063.0",
+    "@sanity/icons": "^3.7.4",
+    "@sanity/image-url": "^2.1.1",
     "next": "^15.5.6",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
