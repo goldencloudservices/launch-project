@@ -6,7 +6,8 @@ export async function GET() {
       _id,
       title,
       excerpt,
-      "slug": slug.current
+      "slug": slug.current,
+      "mainImageUrl": mainImage.asset->url
     }
   `);
 

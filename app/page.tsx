@@ -7,6 +7,7 @@ type Post = {
   title: string;
   excerpt?: string | null;
   slug?: string | null;
+  mainImageUrl?: string | null;
 };
 
 export default function Home() {
@@ -199,9 +200,17 @@ export default function Home() {
                 key={post._id}
                 className="bg-white rounded-lg shadow overflow-hidden"
               >
-                <div className="bg-slate-800 text-white h-48 flex items-center justify-center px-6 text-center font-bold">
-                  Sanity CMS Content
-                </div>
+               {post.mainImageUrl ? (
+  <img
+    src={post.mainImageUrl}
+    alt={post.title}
+    className="h-48 w-full object-cover"
+  />
+) : (
+  <div className="bg-slate-800 text-white h-48 flex items-center justify-center px-6 text-center font-bold">
+    Sanity CMS Content
+  </div>
+)}
 
                 <div className="p-6">
                   <h3 className="text-2xl font-bold">{post.title}</h3>
