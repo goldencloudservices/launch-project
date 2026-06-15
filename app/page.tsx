@@ -15,20 +15,23 @@ export default function Home() {
   const [email, setEmail] = useState("");
   const [interest, setInterest] = useState("Get Updates");
   const [posts, setPosts] = useState<Post[]>([]);
+  const [loadingPosts, setLoadingPosts] = useState(true);
 
-  useEffect(() => {
-    const loadPosts = async () => {
-      try {
-        const response = await fetch("/api/posts");
-        const data = await response.json();
-        setPosts(data.posts || []);
-      } catch {
-        setPosts([]);
-      }
-    };
+useEffect(() => {
+  const loadPosts = async () => {
+    try {
+      const response = await fetch("/api/posts");
+      const data = await response.json();
+      setPosts(data.posts || []);
+    } catch {
+      setPosts([]);
+    } finally {
+      setLoadingPosts(false);
+    }
+  };
 
-    loadPosts();
-  }, []);
+  loadPosts();
+}, []);
 
   const submitLead = async () => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -193,7 +196,11 @@ export default function Home() {
           show the mission in action.
         </p>
 
-        {posts.length > 0 ? (
+        {loadingPosts ? (
+  <div className="text-center text-slate-500 py-10">
+    Loading latest stories...
+  </div>
+) : posts.length > 0 ? (
           <div className="grid md:grid-cols-3 gap-6">
             {posts.map((post) => (
               <div
